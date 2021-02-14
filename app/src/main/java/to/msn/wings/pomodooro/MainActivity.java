@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //opacity bars
         findViewById(android.R.id.content).setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -31,14 +32,14 @@ public class MainActivity extends AppCompatActivity {
             window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
 
-        long countNumber = 1500000;   //25min
+        long countNumber = 5000;   //25min   5sec
         long interval = 10;
 
         Button startButton = findViewById(R.id.start_button);
         Button stopButton = findViewById(R.id.stop_button);
 
         timerText = findViewById(R.id.timer);
-        timerText.setText(dataFormat.format(1500000));
+        timerText.setText(dataFormat.format(5000));
 
         final CountDown countDown = new CountDown(countNumber, interval);
 
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // stop
                 countDown.cancel();
-                timerText.setText(dataFormat.format(1500000));
+                timerText.setText(dataFormat.format(5000));
             }
         });
     }
@@ -73,7 +74,9 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onFinish() {
-            timerText.setText(dataFormat.format(1500000));
+            timerText.setText(dataFormat.format(5000));
+            CountDown.this.start();  //restart
+            CountDown.this.cancel();
         }
     }
 }
