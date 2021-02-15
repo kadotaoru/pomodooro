@@ -2,9 +2,11 @@ package to.msn.wings.pomodooro;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.net.sip.SipSession;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -13,13 +15,13 @@ import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
+import java.util.Timer;
 
 public class MainActivity extends AppCompatActivity {
 
-    //made branch!
     private TextView timerText;
     private SimpleDateFormat dataFormat =
-            new SimpleDateFormat("mm:ss", Locale.US);
+            new SimpleDateFormat("mm:ss.SSS", Locale.US);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         Button stopButton = findViewById(R.id.stop_button);
 
         timerText = findViewById(R.id.timer);
-        timerText.setText(dataFormat.format(5000));
+        timerText.setText(dataFormat.format(0));
 
         final CountDown countDown = new CountDown(countNumber, interval);
 
